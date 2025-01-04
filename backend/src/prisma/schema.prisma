@@ -1,0 +1,97 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                String    @id @default(cuid())
+  address           String    @unique
+  username          String?   @unique
+  email             String?   @unique
+  role              UserRole  @default(FAN)
+  nonce             String    @default(uuid())
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  profile           UserProfile?
+  preferences       UserPreferences?
+  notifications     Notification[]
+  auditLogs         AuditLog[]
+  passwordResets    PasswordReset[]
+}
+
+model UserProfile {
+  id            String    @id @default(cuid())
+  userId        String    @unique
+  user          User      @relation(fields: [userId], references: [id])
+  bio           String?
+  avatarUrl     String?
+  bannerUrl     String?
+  socialLinks   Json?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model UserPreferences {
+  id              String    @id @default(cuid())
+  userId          String    @unique
+  user            User      @relation(fields: [userId], references: [id])
+  emailNotifications Boolean @default(true)
+  pushNotifications Boolean @default(true)
+  privacySettings   Json?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+}
+
+model PasswordReset {
+  id        String    @id @default(cuid())
+  userId    String
+  user      User      @relation(fields: [userId], references: [id])
+  token     String    @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+}
+
+model Notification {
+  id          String    @id @default(cuid())
+  userId      String
+  user        User      @relation(fields: [userId], references: [id])
+  type        String
+  title       String
+  message     String
+  priority    String
+  metadata    Json?
+  readAt      DateTime?
+  timestamp   DateTime  @default(now())
+}
+
+model AuditLog {
+  id          String    @id @default(cuid())
+  userId      String
+  user        User      @relation(fields: [userId], references: [id])
+  action      String
+  category    String
+  severity    String
+  details     Json?
+  ipAddress   String
+  timestamp   DateTime  @default(now())
+}
+
+enum UserRole {
+  ADMIN
+  ARTIST
+  FAN
+}
+
+// Indexes
+@@index([userId])
+@@index([type])
+@@index([timestamp])
+@@index([action, category])

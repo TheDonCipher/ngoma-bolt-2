@@ -1,0 +1,69 @@
+##Store on IPFS
+IPFS is ideal for storing large, immutable, or publicly accessible files because it ensures decentralization and content integrity.
+
+1. Music Files
+-Audio files (e.g., .mp3, .flac) uploaded by artists.
+-Use IPFS for hosting these files to ensure they remain decentralized and accessible.
+
+2. Album Art and Images
+-Cover images for albums, tracks, or artist profiles.
+
+3.NFT Metadata
+-JSON metadata for NFTs representing songs or albums, including:
+-Title, description, and track details.
+-Links to music files (IPFS CID).
+-Attributes like release date, genre, and artist name.
+
+4.Artist Merch Images
+-Images of physical or digital merchandise sold by artists.
+
+5.Copyright Proofs
+-Immutable files or records proving copyright ownership (e.g., certificates or registration metadata).
+
+
+##Store in the Database
+Databases are ideal for storing dynamic, queryable, and mutable data to enhance app performance.
+
+1. User Data
+
+-Wallet addresses (primary keys).
+-Usernames and roles (e.g., artist, listener).
+-Account preferences (e.g., favorite tracks, playlists).
+
+2. Music Metadata
+-Metadata for music files, like:
+-Track name, duration, genre, and release date.
+-Artist and album associations.
+-IPFS CID for file retrieval.
+
+3. Royalty Management
+-Records of royalty splits and payments:
+-Percentage shares.
+-Wallet addresses of collaborators.
+-Payment transaction history.
+-Playlist Data
+
+4. Playlists created by listeners:
+- Playlist name, description.
+- Associated track IDs.
+
+5. News Posts and Comments
+- Posts, comments, and shares made by users:
+- Author details, timestamps, and content text.
+
+6. Merchandise Catalog
+-Information about products sold by artists:
+-Product name, description, price, and stock levels.
+-IPFS CID for product images.
+
+7. Blockchain Transaction Records
+-Mappings of transaction hashes to:
+-User accounts (wallets).
+-NFT IDs, royalties, or purchases.
+
+8. Admin-Managed Content
+-Blog posts, help articles, and FAQs.
+
+9. Analytics and Usage Logs
+-Play count for tracks.
+-User activity logs for trends and recommendations.
